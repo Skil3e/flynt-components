@@ -1,0 +1,20 @@
+<flynt-component name="ElementModal" {{ closeOnClickOutside ? 'data-close-on-click-outside="true"' }}>
+{{ trigger }}
+<dialog class="modal" data-ref="modal">
+    <div class="modal-content">
+        {% if header %}
+            <div class="modal-header">
+                {{ header }}
+            </div>
+        {% endif %}
+        <div class="modal-body">
+            {{ body }}
+        </div>
+        {% if footer %}
+            <div class="modal-footer">
+                {{ footer }}
+            </div>
+        {% endif %}
+    </div>
+</dialog>
+</flynt-component>
