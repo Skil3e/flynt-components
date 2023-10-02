@@ -1,0 +1,53 @@
+<div>
+  <p class="formTitle">{{ labels.filterBy }}</p>
+  <form
+    class="boxPadding"
+    method="GET"
+    data-ref="form"
+    hx-push-url="true"
+    hx-get="{{ post.link }}"
+    hx-target="closest [data-ref='content']"
+    hx-select="[data-ref='content']"
+    hx-swap="outerHTML show:body:top"
+    hx-trigger="change"
+    data-theme="light"
+  >
+    {% for taxonomy in taxonomies %}
+      <fieldset>
+        <legend>{{ taxonomy.label }}</legend>
+        {% for term in taxonomy.terms %}
+          <input
+            id="{{ term.id }}"
+            name="{{ taxonomy.param }}[]"
+            value="{{ term.id }}"
+            type="checkbox"
+            {{ term.selected ? "checked" }}
+          />
+          <label for="{{ term.id }}">{{ term.name }}</label>
+        {% endfor %}
+      </fieldset>
+    {% endfor %}
+    <fieldset>
+      <legend>Order by date</legend>
+      <input
+        id="order-asc"
+        name="order"
+        value="ASC"
+        type="radio"
+        {{ order == "ASC" ? "checked" }}
+      />
+      <label for="order-asc">Ascending</label>
+      <input
+        id="order-desc"
+        name="order"
+        value="DESC"
+        type="radio"
+        {{ order == "DESC" ? "checked" }}
+      />
+      <label for="order-desc">Descending</label>
+    </fieldset>
+    <noscript>
+      <input type="submit">
+    </noscript>
+  </form>
+</div>

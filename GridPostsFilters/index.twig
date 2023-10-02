@@ -1,0 +1,40 @@
+<flynt-component
+  name="GridPostsFilters"
+  load:on="visible"
+  class="componentSpacing" {{ options.theme ? 'data-theme="' ~ options.theme ~ '"' }}
+  hx-boost="true"
+  data-ref="content"
+>
+  <div class="container" data-flow="content">
+    <div data-size="medium" data-align="center" data-text-align="center">
+      <h1>{{ title }}</h1>
+      {% set html = isHome ? preContentHtml : description %}
+      {{ html|e('wp_kses_post') }}
+    </div>
+
+    {% include 'Partials/_form.twig' %}
+
+    {% if posts|length > 0 %}
+      <ul data-ref="posts" class="posts resetList">
+        {% for post in posts %}
+          {% set ariaLabelledbyId = uuid ~ '-' ~ loop.index %}
+          <li
+            class="post boxBorder"
+            style="view-transition-name: post-{{ post.id }}"
+            id="{{ ariaLabelledbyId }}"
+            data-theme="reset"
+          >
+              {% include 'Partials/_card.twig' %}
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p class="posts-empty">{{ labels.noPostsFound }}</p>
+    {% endif %}
+
+    {% set pagination = posts.pagination %}
+    {% if pagination.pages %}
+      {% include 'Partials/_pagination.twig' %}
+    {% endif %}
+  </div>
+</flynt-component>

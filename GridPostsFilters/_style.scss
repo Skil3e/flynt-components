@@ -1,0 +1,32 @@
+flynt-component[name='GridPostsFilters'] {
+  .formTitle {
+    display: inline-block;
+    color: #fff;
+    background-color: var(--color-accent);
+    padding: 0.625rem 1rem;
+    font-weight: 700;
+  }
+
+  form {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+
+  fieldset {
+    margin: 0;
+  }
+
+  legend {
+    margin-block-end: 0.625rem;
+  }
+
+  .posts {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(320px, 100%), 1fr));
+    gap: 1rem;
+  }
+
+  @import "Partials/card";
+  @import "Partials/pagination";
+}

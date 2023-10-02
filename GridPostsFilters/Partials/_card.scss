@@ -1,0 +1,19 @@
+.card-link {
+  color: currentColor;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  block-size: 100%;
+}
+
+.card-content {
+  flex-grow: 1;
+}
+
+.card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--box-spacing) var(--box-spacing);
+  margin-block-start: auto;
+}

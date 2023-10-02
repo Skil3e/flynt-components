@@ -1,0 +1,31 @@
+<a class="card-link" href="{{ post.link|e('esc_url') }}" aria-labelledby="{{ ariaLabelledbyId }}">
+    {% if post.thumbnail %}
+        <figure class="figure">
+            <img
+                    class="post-image figure-image lazyload"
+                    src="{{ post.thumbnail|resizeDynamic(768, (768 / 3 * 2)|round, 'center') }}"
+                    width="{{ 768 }}"
+                    height="{{ (768 / 3 * 2)|round }}"
+                    srcset="{{ placeholderImage(768, (768 / 3 * 2)|round, 'rgba(125, 125, 125, 0.1)') }}"
+                    data-srcset="
+                      {{ post.thumbnail|resizeDynamic(1920, (1920 / 3 * 2)|round, 'center') }} 1920w,
+                      {{ post.thumbnail|resizeDynamic(1600, (1600 / 3 * 2)|round, 'center') }} 1600w,
+                      {{ post.thumbnail|resizeDynamic(1440, (1440 / 3 * 2)|round, 'center') }} 1440w,
+                      {{ post.thumbnail|resizeDynamic(1366, (1366 / 3 * 2)|round, 'center') }} 1366w,
+                      {{ post.thumbnail|resizeDynamic(1024, (1024 / 3 * 2)|round, 'center') }} 1024w,
+                      {{ post.thumbnail|resizeDynamic(768, (768 / 3 * 2)|round, 'center') }} 768w,
+                      {{ post.thumbnail|resizeDynamic(640, (640 / 3 * 2)|round, 'center') }} 640w"
+                    data-sizes="auto"
+                    alt="{{ post.thumbnail.alt|e ?: post.title }}"
+            >
+        </figure>
+    {% endif %}
+    <div class="card-content boxPadding">
+        <h2 class="h5">{{ post.title }}</h2>
+        <p>{{ post.excerpt.read_more(false) }}</p>
+    </div>
+    <footer class="card-footer">
+        <small class="readingTime">{{ labels.readingTime|replace({'%d': post.content|readingtime}) }}</small>
+        <span class="button button--text">{{ labels.readMore }}</span>
+    </footer>
+</a>
